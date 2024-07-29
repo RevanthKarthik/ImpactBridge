@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ donation.title }}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .content-section {
+            padding: 20px;
+            margin-top: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .media-list img, .media-list video {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .media-list .card {
+            margin-bottom: 20px;
+        }
+        .article-title {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+        .donate-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .donate-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <article class="content-section">
+            <h2 class="article-title">{{ donation.title }}</h2>
+            <h4 class="text-muted">{{ donation.description }}</h4>
+           
+            {% if media_objects %}
+                <div class="media-list row">
+                    {% for media in media_objects %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if media.media_type == 'image' %}
+                                        <img src="{{ media.file.url }}" class="card-img-top" alt="{{ media.donation.title }}">
+                                    {% elif media.media_type == 'video' %}
+                                        <video controls class="card-img-top">
+                                            <source src="{{ media.file.url }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    {% endif %}
+                                    <p class="card-text mt-2">Media Type: {{ media.media_type }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted">No media files found for this donation.</p>
+            {% endif %}
+            <p class="article-content">{{ donation.story }}</p>
+            
+            <a href="{% url 'donate' donation.pk donation.user.pk %}" class="btn donate-btn">Donate</a>
+        </article>
+    </div>
+</body>
+</html>

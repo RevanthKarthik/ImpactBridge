@@ -1,0 +1,64 @@
+<!-- users/templates/users/ngo_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        .ngo-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        .ngo-item img {
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .ngo-header {
+            display: flex;
+            align-items: center;
+        }
+        .ngo-header h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">List of NGOs</h1>
+        <div class="ngo-list">
+            {% if ngos %}
+                {% for ngo in ngos %}
+                <div class="ngo-item">
+                    <div class="ngo-header">
+                        <img src="{{ ngo.Logo.url }}" alt="{{ ngo.NGO_name }}" width="100" height="100">
+                        <h2>{{ ngo.NGO_name }}</h2>
+                    </div>
+                    <p><strong>Phone:</strong> {{ ngo.phone_number }}</p>
+                    <p><strong>Email:</strong> {{ ngo.NGO_email }}</p>
+                    <p><strong>Website:</strong> <a href="{{ ngo.NGO_website }}" target="_blank">{{ ngo.NGO_website }}</a></p>
+                    <p><strong>Address:</strong> {{ ngo.NGO_address }}, {{ ngo.NGO_state }}, {{ ngo.NGO_country }} - {{ ngo.NGO_pin_code }}</p>
+                    <p><strong>Founded Year:</strong> {{ ngo.NGO_founded_year }}</p>
+                    <p><strong>Mission Statement:</strong> {{ ngo.mission_statement }}</p>
+                    <p><strong>Verified:</strong> {{ ngo.NGO_verified|yesno:"Yes,No" }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No NGOs found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

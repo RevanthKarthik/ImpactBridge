@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Donation Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type=text], input[type=email], input[type=tel], input[type=number], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type=file] {
+            margin-top: 5px;
+        }
+        select {
+            height: 40px;
+        }
+        button[type=button], input[type=submit] {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type=button]:hover, input[type=submit]:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        #add-media-field {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            margin-top: 10px;
+        }
+        #add-media-field:hover {
+            background-color: #495057;
+            border-color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Donation Post</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="story">Story:</label>
+            <textarea id="story" name="story" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Select Category</option>
+                {% for choice in donation_post.CATEGORY_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="end_date">End Date:</label>
+            <input type="datetime-local" id="end_date" name="end_date" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="goal_amount">Goal Amount:</label>
+            <input type="number" id="goal_amount" name="goal_amount" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address">
+        </div>
+        
+        <div class="form-group">
+            <label for="pin_code">PIN Code:</label>
+            <input type="text" id="pin_code" name="pin_code" pattern="[1-9][0-9]{5}" title="Invalid PIN code format">
+        </div>
+        
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" value="India" readonly>
+        </div>
+        
+        <div class="form-group">
+            <label for="state">State:</label>
+            <select id="state" name="state" required>
+                <option value="" disabled selected>Select State</option>
+                {% for state in donation_post.INDIAN_STATES %}
+                    <option value="{{ state.0 }}">{{ state.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        
+        <div class="form-group">
+            <label for="phone_number">Phone Number:</label>
+            <input type="tel" id="phone_number" name="phone_number" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" required>
+        </div>
+        
+        <div id="media-fields" class="form-group">
+            <div class="form-group">
+                <label for="media-type">Media Type:</label>
+                <select name="media_type[]" class="form-control" required>
+                    <option value="image">Image</option>
+                    <option value="video">Video</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="file">File:</label>
+                <input type="file" name="file[]" class="form-control" required>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary mb-3" id="add-media-field">Add Another File</button>
+            
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        document.getElementById('add-media-field').addEventListener('click', function () {
+            var mediaFields = document.getElementById('media-fields');
+            var newField = document.createElement('div');
+            newField.innerHTML = `
+                <div class="form-group">
+                    <label for="media-type">Media Type:</label>
+                    <select name="media_type[]" class="form-control" required>
+                        <option value="image">Image</option>
+                        <option value="video">Video</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="file">File:</label>
+                    <input type="file" name="file[]" class="form-control" required>
+                </div>
+            `;
+            mediaFields.appendChild(newField);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,726 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" 
+    integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc="
+     crossorigin="anonymous" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'donations/main.css' '%}">
+ <!-- carousel  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+    <!-- icons  --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+.colorbutton{
+    background: #C5104A;
+    border: none;
+}
+.colorbutton:hover{
+    background: #C5104A !important;
+}
+      .emergencies{
+        font-family: Arial, Helvetica, sans-serif;
+      }
+        .contain{
+            width: 75%;
+            position: relative;
+            margin: auto;
+            text-align: center;
+        }
+        .slick-dots li button:before{
+            font-size: 14px;
+        }
+        .slick-next:before,
+        .slick-prev:before{
+            color: #ff8159;
+            font-size: 22px;
+        }
+        .slick-list {
+          margin: 0px 38px;
+        }
+        .slides {
+          display: flex;
+          transition: transform 1s ease-in-out;
+          text-align: center;
+          width: 1086px !important;
+        }
+        .icons {
+          text-align: center;
+          margin: 0px 0px;
+          padding: 10px 10px;
+        }
+        .icons i {
+          font-size: 38px;
+        }
+    </style>
+     <!-- style  -->
+  </head>
+  <body>
+    {% if messages%}
+        {% for message in messages%}
+          <div class="alert alert-{{message.tags}}">
+            {{ message }}
+          </div>
+        {% endfor %}
+    {% endif %}
+
+
+    <!-- categories-->
+    <div >
+      <h1>categories</h1>
+    </div>
+    <div>
+      <div class="contain">
+          <div class="slides">
+            <div class="icons" onclick="showmedical()">
+              <i class="fa-solid fa-kit-medical"></i>
+              <p>Medical</p>
+            </div>
+            <div class="icons"onclick="showchild()" style="cursor: grab;">
+              <i class="fa-solid fa-child"></i>
+              <p>Child</p>
+            </div>
+            <div class="icons" onclick="showanimal()">
+              <i class="fa-solid fa-paw"></i>
+              <p>animal</p>
+            </div>
+            <div class="icons" onclick="showelder()">
+              <i class="fa-solid fa-person-cane"></i>
+              <p>elder</p>
+            </div>
+            <div class="icons" onclick="showeducation()">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <p>education</p>
+            </div>
+            <div class="icons" onclick="showspecial()">
+              <i class="fa-solid fa-wheelchair"></i>
+              <p>speciallyabled</p>
+            </div>
+            <div class="icons" onclick="showenvironment()">
+              <i class="fa-solid fa-globe"></i>
+              <p>environment</p>
+            </div>
+            <div class="icons" onclick="showhunger()">
+              <i class="fa-solid fa-utensils"></i>
+              <p>hunger</p>
+            </div>
+            <div class="icons" onclick="showpoverty()">
+              <i class="fa-solid fa-dollar-sign"></i>
+              <p>poverty</p>
+            </div>
+            <div class="icons" onclick="showwomen()">
+              <i class="fa-solid fa-person-dress"></i>
+              <p>women</p>
+            </div>
+            <div class="icons" onclick="showhumanity()">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+              <p>humanity</p>
+            </div>
+            <div class="icons"  onclick="showcommunity()">
+              <i class="fa-solid fa-people-group"></i>
+              <p>community</p>
+            </div>
+            <div class="icons" onclick="showarts()">
+              <i class="fa-solid fa-paintbrush"></i>
+              <p>arts</p>
+            </div>
+          </div>
+      </div> 
+    </div>
+
+    <div class="categories">
+      <div class="card-group"  id="medical" style="display: flex;">
+        <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+          {% for urgent_post in urgent_posts %}
+          {% for post, image in donation_posts_with_images %}
+              {% if urgent_post.pk == post.pk %}
+                  <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+                      {% if image %}
+                          <img src="{{ image.file.url }}" alt="{{ image.file.name }}" class="card-img-top rounded-3 img-fluid">
+                      {% else %}
+                          <img src="{% static 'images/default-image.jpg' %}" alt="No Image Available" class="card-img-top rounded-3 img-fluid">
+                      {% endif %}
+                      <div class="card-body" style="margin: 0px;width: 420px;">
+                          <h5 class="card-title"><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h5>
+                          <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+                              <p>{{ post.goal_amount }}</p>
+                          </div>
+                          <p class="card-text">{{ post.description }}</p>
+                          <button type="button" class="btn btn-primary colorbutton" style="align-self: center;">Donate Now</button>
+                      </div>
+                  </div>
+              {% endif %}
+          {% endfor %}
+      {% endfor %}
+        </div>
+      </div>
+ 
+      <div class="card-group" id="child" style="display: none;">
+        <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+          {% for post in child_posts %}
+          <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+            <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+            <div class="card-body" style="margin: 0px;width: 420px;">
+              <h5 class="card-title">{{post.title}}</h5>
+              <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+                <div >
+                  <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+                </div>
+                <small class="text-body-secondary">aslammohammad</small>
+              </div>
+              <p class="card-text">{{post.description}}</p>
+              <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+      </div>
+      <div class="card-group" id="animal" style="display: none;">
+        <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+          {% for post in animal_posts %}
+          <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+            <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+            <div class="card-body" style="margin: 0px;width: 420px;">
+              <h5 class="card-title">{{post.title}}</h5>
+              <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+                <div >
+                  <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+                </div>
+                <small class="text-body-secondary">aslammohammad</small>
+              </div>
+              <p class="card-text">{{post.description}}</p>
+              <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+      </div>
+      <div class="card-group" id="elder" style="display: none;">
+        <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+          {% for post in elder_posts %}
+          <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+            <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+            <div class="card-body" style="margin: 0px;width: 420px;">
+              <h5 class="card-title">{{post.title}}</h5>
+              <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+                <div >
+                  <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+                </div>
+                <small class="text-body-secondary">aslammohammad</small>
+              </div>
+              <p class="card-text">{{post.description}}</p>
+              <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+      </div>
+
+      <div class="card-group"  id="education" style="display: flex;">
+        <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+          {% for urgent_post in education_posts %}
+          {% for post, image in donation_posts_with_images %}
+              {% if urgent_post.pk == post.pk %}
+                  <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+                      {% if image %}
+                          <img src="{{ image.file.url }}" alt="{{ image.file.name }}" class="card-img-top rounded-3 img-fluid">
+                      {% else %}
+                          <img src="{% static 'images/default-image.jpg' %}" alt="No Image Available" class="card-img-top rounded-3 img-fluid">
+                      {% endif %}
+                      <div class="card-body" style="margin: 0px;width: 420px;">
+                          <h5 class="card-title"><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h5>
+                          <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+                              <p>{{ post.goal_amount }}</p>
+                          </div>
+                          <p class="card-text">{{ post.description }}</p>
+                          <button type="button" class="btn btn-primary colorbutton" style="align-self: center;">Donate Now</button>
+                      </div>
+                  </div>
+              {% endif %}
+          {% endfor %}
+      {% endfor %}
+        </div>
+      </div>
+        <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+      </div>
+      <div class="card-group" id="speciallyabled" style="display: none;">
+        <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+          {% for post in healthandwellness_posts %}
+          <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+            <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+            <div class="card-body" style="margin: 0px;width: 420px;">
+              <h5 class="card-title">{{post.title}}</h5>
+              <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+                <div >
+                  <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+                </div>
+                <small class="text-body-secondary">aslammohammad</small>
+              </div>
+              <p class="card-text">{{post.description}}</p>
+              <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+      </div>
+    </div>
+    <div class="card-group" id="environment"  style="display: none;">
+      <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+        {% for post in environment_posts %}
+        <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+          <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+          <div class="card-body" style="margin: 0px;width: 420px;">
+            <h5 class="card-title">{{post.title}}</h5>
+            <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+              <div >
+                <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+              </div>
+              <small class="text-body-secondary">aslammohammad</small>
+            </div>
+            <p class="card-text">{{post.description}}</p>
+            <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+    </div>
+    <div class="card-group" id="hunger" style="display: none;">
+      <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+        {% for post in hunger_posts %}
+        <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+          <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+          <div class="card-body" style="margin: 0px;width: 420px;">
+            <h5 class="card-title">{{post.title}}</h5>
+            <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+              <div >
+                <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+              </div>
+              <small class="text-body-secondary">aslammohammad</small>
+            </div>
+            <p class="card-text">{{post.description}}</p>
+            <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+    </div>
+    <div class="card-group" id="poverty" style="display: none;">
+      <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+        {% for post in poverty_posts %}
+        <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+          <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+          <div class="card-body" style="margin: 0px;width: 420px;">
+            <h5 class="card-title">{{post.title}}</h5>
+            <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+              <div >
+                <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+              </div>
+              <small class="text-body-secondary">aslammohammad</small>
+            </div>
+            <p class="card-text">{{post.description}}</p>
+            <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+    </div>
+    <div class="card-group" id="women"  style="display: none;">
+      <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+        {% for post in women_posts %}
+        <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+          <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+          <div class="card-body" style="margin: 0px;width: 420px;">
+            <h5 class="card-title">{{post.title}}</h5>
+            <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+              <div >
+                <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+              </div>
+              <small class="text-body-secondary">aslammohammad</small>
+            </div>
+            <p class="card-text">{{post.description}}</p>
+            <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+    </div>
+    <div class="card-group" id="humanity"  style="display: none;">
+      <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+        {% for post in humanity_posts %}
+        <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+          <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+          <div class="card-body" style="margin: 0px;width: 420px;">
+            <h5 class="card-title">{{post.title}}</h5>
+            <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+              <div >
+                <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+              </div>
+              <small class="text-body-secondary">aslammohammad</small>
+            </div>
+            <p class="card-text">{{post.description}}</p>
+            <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+    </div>
+    <div class="card-group" id="community" style="display: none;">
+      <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+        {% for post in community_posts %}
+        <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+          <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+          <div class="card-body" style="margin: 0px;width: 420px;">
+            <h5 class="card-title">{{post.title}}</h5>
+            <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+              <div >
+                <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+              </div>
+              <small class="text-body-secondary">aslammohammad</small>
+            </div>
+            <p class="card-text">{{post.description}}</p>
+            <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+    </div>
+    <div class="card-group" id="arts" style="display: none;">
+      <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 mr-auto ml-auto" >
+        {% for post in arts_posts %}
+        <div class="card pt-2" style="box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24,40,0.1);scale: 0.9;">
+          <img src="{% static 'images/slide1.jpg'%}" class="card-img-top rounded-3" alt="...">
+          <div class="card-body" style="margin: 0px;width: 420px;">
+            <h5 class="card-title">{{post.title}}</h5>
+            <div class="card-footer" style="display: flex; align-items: center; gap: 20px;">
+              <div >
+                <img  class="rounded-5" src="{%  static 'images/slide1.jpg'%}" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+              </div>
+              <small class="text-body-secondary">aslammohammad</small>
+            </div>
+            <p class="card-text">{{post.description}}</p>
+            <button type="button" class="btn btn-primary colorbutton " style="align-self: center;">Donate Now</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-primary" style="position: relative;right: -85%;margin-bottom: 20px;">View More</button>
+    </div>
+  </div>
+
+    <!-- footer -->
+    <footer class="footer bg-footer">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
+                <h4 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: #539f53;">IMPACT BRIDGE</h4>
+                  <p class="mt-4">BE SOMEOME WHO BRING LIGHT INTO DARK FOR SOMEONE WHO HAD THEIR BIRTH IN DARK..</p>
+              </div><!--end col-->
+  
+              <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                  <h4 class="text-light footer-head">Donor</h4>
+                  <ul class="list-unstyled footer-list mt-4">
+                      <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Donate to a FundRaiser</a></li>
+                      <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Donate to an NGO</a></li>
+                      <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Monthly Donations</a></li>
+                      <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Occasional Donations</a></li>
+                  </ul>
+              </div><!--end col-->
+  
+              <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                  <h4 class="text-light footer-head">Need A Hand</h4>
+                  <ul class="list-unstyled footer-list mt-4">
+                      <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Start a FundRaiser</a></li>
+                      <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Register an NG0</a></li>
+                  </ul>
+              </div><!--end col-->
+  
+              <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                <h4 class="text-light footer-head">Services</h4>
+                  <ul class="list-unstyled footer-list mt-4">
+                      <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i>Emergencies</a></li>
+                      <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Categories</a></li>
+                      <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Be A Volunteer</a></li>
+                      <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Blog</a></li>
+                  </ul>
+              </div><!--end col-->
+              <div style="position:absolute;top: 207px;">
+                <a href="{% url 'account_login' %}" class="login-button" style="margin-right: 9px;">Log In</a>
+                <a href="{% url 'account_signup' %}" class="login-button">Register</a>
+              </div>
+          </div><!--end row-->
+      </div><!--end container-->
+  </footer>
+  <footer class="footer bg-footer footer-bar">
+      <div class="container text-center">
+          <div class="row align-items-center">
+              <div class="col-sm-6">
+                  <div class="text-sm-left">
+                      <p class="mb-0">&copy; 2020. Design with <i class="mdi mdi-heart text-danger"></i></p>
+                  </div>
+              </div><!--end col-->
+  
+              <div class="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                  <ul class="list-unstyled text-sm-right social-icon social mb-0">
+                      <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-facebook" title="Facebook"></i></a></li>
+                      <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-instagram" title="Instagram"></i></a></li>
+                      <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-twitter" title="Twitter"></i></a></li>
+                      <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-google-plus" title="Google +"></i></a></li>
+                      <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-linkedin" title="Linkedin"></i></a></li>
+                  </ul><!--end icon-->
+              </div><!--end col-->
+          </div><!--end row-->
+      </div><!--end container-->
+  </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
+    <!-- carouselnew -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script>
+      
+        $('.slides').slick({
+            slidesToShow:5,
+            slidesToScroll:5,
+            dots: false,
+            arrows:true,
+            autoplay: false,
+            infinite:true
+        });
+    </script>
+    <script>
+      function showmedical(){
+        var element = document.getElementById("medical").style.display="flex";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showchild() {
+        var element = document.getElementById("child").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showanimal() {
+        var element = document.getElementById("animal").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showelder() {
+        var element = document.getElementById("elder").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showwomen() {
+        var element = document.getElementById("women").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showeducation() {
+        var element = document.getElementById("education").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showspecial() {
+        var element = document.getElementById("speciallyabled").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showenvironment() {
+        var element = document.getElementById("environment").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showhunger() {
+        var element = document.getElementById("hunger").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showarts() {
+        var element = document.getElementById("arts").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showhumanity() {
+        var element = document.getElementById("humanity").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("community").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+      function showcommunity() {
+        var element = document.getElementById("community").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("poverty").style.display="none";
+      }
+
+      function showpoverty() {
+        var element = document.getElementById("poverty").style.display="flex";
+        document.getElementById("medical").style.display="none";
+        document.getElementById("child").style.display="none";
+        document.getElementById("animal").style.display="none";
+        document.getElementById("elder").style.display="none";
+        document.getElementById("women").style.display="none";
+        document.getElementById("education").style.display="none";
+        document.getElementById("speciallyabled").style.display="none";
+        document.getElementById("environment").style.display="none";
+        document.getElementById("hunger").style.display="none";
+        document.getElementById("arts").style.display="none";
+        document.getElementById("humanity").style.display="none";
+        document.getElementById("community").style.display="none";
+      }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+ </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First Time Login</title>
+</head>
+<body>
+    <h1>Select Your Category</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>
+            <input type="radio" name="category" value="user" required> User
+        </label><br>
+        <label>
+            <input type="radio" name="category" value="ngo" required> NGO
+        </label><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

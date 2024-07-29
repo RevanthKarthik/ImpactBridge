@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            font-family: "Poppins",sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #000000;
+            text-align: center;
+            margin: 20px 55px;
+            margin-left: 90px;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-between;
+            max-width: 95%;
+        }
+
+        article p {
+            text-align: justify;
+        }
+
+        main {
+            flex: 2;
+        }
+
+        article {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            margin-right: 10px;
+            display: grid;
+            align-content: start;
+            text-align: start;
+            width: 790px;
+        }
+
+        article img {
+            width: 790px;
+            border-radius: 16px;
+            object-fit: cover;
+            height: 320px;
+            align-items: center;
+        }
+
+        aside {
+            position: sticky;
+            top: 20px;
+            flex: 1;
+            margin-top: 20px;
+            padding: 20px 10px;
+            height: fit-content;
+            width: 360px;
+            border: 1px solid #e8e8e8;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px 2px rgba(16, 24, 40, .1);
+            text-align: start;
+            justify-content: center;
+        }
+
+        aside .buttons {
+            font-family: "Poppins",sans-serif;
+            padding: 12px 10px;
+            font-size: 1rem;
+            width: 80%;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            background-color: #cd4226;
+            text-align: center;
+        }
+
+        aside .buttons:hover {
+            opacity: 0.8;
+        }
+
+        .bdiv {
+            gap: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .head {
+            margin: 10px 20px;
+        }
+
+        .headin {
+            width: 100%;
+            font-family: Poppins;
+            font-style: normal;
+            font-size: 38px !important;
+            font-weight: 700;
+            text-align: start;
+            margin: 0px;
+            font-size: 1rem;
+        }
+
+        .head p {
+            font-family: Poppins;
+            font-style: normal;
+            text-align: start;
+            font-size: 22px;
+        }
+
+        .cardset {
+            display: grid;
+            align-content: center;
+            gap: 20px;
+            text-align: start;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .card1 {
+            position: relative;
+            width: 260px;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #e8e8e8;
+            box-shadow: 0 2px 8px -2px rgba(16, 24, 40, .1);
+            box-sizing: border-box;
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .card1 p {
+            font-weight: 500;
+            line-height: 22px;
+            width: 145px;
+            font-family: "Poppins",sans-serif;
+        }
+        .info section{ 
+            font-family: Poppins;
+            font-style: normal;
+            font-size: 1rem;
+            line-height: 24px;
+            letter-spacing: .01em;
+            color: #222;
+            letter-spacing: 0.1em;  
+        }
+        .info section p{
+            color: #5d5b5bcf;
+            margin: 0 0 15px;
+            font-family: Poppins;
+            font-style: normal;
+        }
+        strong{
+            color: #000000;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .dovia{
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 1.25rem;
+            line-height: 32px;
+            color: #222;
+            margin-bottom: 16px;
+            margin-top: 30px;
+        }
+        /* styleforpro */
+          .bared{
+            flex: 1;
+            margin-top: 10px;
+            padding: 20px 14px;
+            height: fit-content;
+            border: 1px solid #e8e8e8;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px 2px rgba(16, 24, 40, .1);
+            text-align: start;
+            justify-content: center;
+          }
+          .bared p{
+            gap: 10px;
+            font-family: "Poppins", sans-serif;
+          }
+          .progress {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            border: none;
+            border-radius: 20px !important;
+            height: 1.0rem;
+        }  
+        .progress::-webkit-progress-bar {
+            background-color: #f0f0f0;
+            border-radius: 20px !important;
+        }
+        .progress1::-webkit-progress-value {
+            border-radius: 20px !important;
+            background: orange;
+        }
+        
+    </style>
+    <title>Blogging Website Layout</title>
+</head>
+
+<body>
+    <div style="background-color: rgb(221, 149, 56);height: 65px;">
+        Navbar</div>
+    <header>
+        <div class="head">
+            <p class="headin">Title given by the postedby person that is catchy and tells about the incident. </p>
+            <p style="margin-bottom: 10px;">One-liner quotes</p>
+            <p style="color: #5d5b5bcf; font-size: 1rem;">posted on {{postedon}} </p>
+        </div>
+        <div class="container1">
+            <main>
+                <article>
+                    <img src="beautiful-landscape-mother-nature.jpg" alt="">
+                    <div class="info">
+                        <section class="story">
+                            <h3>Story/Information</h3>
+                            <div>
+                                <p>Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner</p>
+                                <p>
+                                    <strong>Image and Incident info heading and much more..incident hapening title and something that
+                                        tells in One-liner</strong>
+                                </p>
+                                <p>
+                                    Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info.
+                                </p>
+                                <p>
+                                    <strong>
+                                        tells in One-linerImage and Incident info .</strong>
+                                </p>
+                                <p>incident hapening title and something that
+                                    tells in One-linerImage and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image
+                                </p>
+                                <p>
+                                    and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                    tells in One-liner  
+                                </p>
+                                
+                            </div>
+                        </section>
+                        <section class="updates">
+                            <h3>Updates:</h3>
+                            <p>Date:11-11-11</p>
+                            <img src="beautiful-landscape-mother-nature.jpg" alt="" style="height: 300px; width: 520px; margin: 10px 0px;float: left; margin-right:16px ;">
+                            <p>
+                                Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.
+                            </p>
+                            <p>
+                                <strong>Image and Incident info heading and much more..!r</strong>
+                            </p>
+                            <p>
+                                Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.Image and Incident info heading and much more..incident hapening title and something that
+                                tells in One-liner.
+                            </p>
+                        </section>
+                        <section class="arranger" width="fit-content">
+                            
+                            <div style="width: 700px !important; padding: 20px 30px;background-color: #f6e1c5;border-radius: 22px;">
+                                <h1 style="margin-bottom: 32px;font-size: 1.5rem;">Organisers:</h1>
+                                <div style="display: flex; align-items: end;gap: 20px;"> 
+                                   <img src="beautiful-landscape-mother-nature.jpg" alt="" style="height: 50px;width: 50px;border-radius: 50%;"> 
+                                   <p>postedbyname</p>
+                                 </div>
+                            
+                            </div>
+                        </section>
+                    </div>
+
+                </article>
+
+
+            </main>
+            <div style="display: block;">
+                <div class="bared">
+                    <div class="flexed" style="display: flex;width: 100%;">
+                        <p class="nowm" >
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                            13,500
+                        </p>
+                        <p class="goal" style="padding-left: 60%;">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                            1,00,000
+                        </p>
+                    </div>
+                    <progress class="progress progress1" max="1000" value="400"></progress>
+                    <div class="sup" style="margin: 20px 20px; display: flex; align-items: center; gap: 20px; margin-left: 58px;">
+                        <i class="fa-solid fa-user-group" style="font-size: 32px !important;"></i>
+                        <p style="width: 180px;">{{Supporters}} Supporters backed</p>
+                    </div>
+                </div>
+                <aside>
+                    <div class="cardset">
+                        <p class="dovia">Donation Methods: </p>
+                        <div class="card1">
+                            <span style="color: transparent;display: inline-block;">
+                                <img src="https://cfstatic.give.do/ca647d23-2a41-41e9-8114-739c80a55541.webp" alt="upi" style="height: 48px;"></span>
+                            <p>GooglePay,Paytm and others..</p>
+                        </div>
+                        <div class="card1">
+                            <span style="color: transparent;display: inline-block;">
+                                <img src="https://cfstatic.give.do/f49d2a60-6a84-4143-bf6b-fbc4901e024d.webp" alt="creditcard" style="height: 48px;"></span>
+                            <p>Credit & Debit Cards</p>
+                        </div>
+                        <div class="card1">
+                            <span style="color: transparent;display: inline-block;">
+                                <img src="https://cfstatic.give.do/2b7b0d8a-c9cc-49ad-be7c-816c76a4dd4c.webp" alt="netbank" style="height: 48px;"></span>
+                            <p>Internet Banking & Transfer</p>
+                        </div>
+                    </div>
+                    <div class="bdiv">
+                        <button class="buttons">DONATE NOW</button>
+                        <button class="buttons"
+                            style="background: none !important; border: 2px solid rgba(163, 160, 160, 0.469); color: black;">Share</button>
+                    </div>
+    
+                </aside>
+            </div>
+        </div>
+    </header>
+    <div style="background: #cd4226;height: 300px;">
+        Footer
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>
