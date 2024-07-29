@@ -162,8 +162,8 @@ def donate(request, donation_pk, user_pk):
         # Convert the IST datetime to ISO8601 format
         ist_datetime_iso = date_plus_one_day.isoformat()+"+05:30"
 
-        api_key = 'TEST1019726310159d84051d9684409136279101'
-        api_secret = 'cfsk_ma_test_9f7806b183df0cbedf76e4a00a8bfbff_ff123b76'
+        api_key = 'xxx' #generate using cashfree api
+        api_secret = 'xxx'
         auth_string = f"{api_key}:{api_secret}"
         b64_auth_string = base64.b64encode(auth_string.encode()).decode()
         date_plus_one_day_iso = (datetime.utcnow() + timedelta(days=1)).isoformat()
@@ -261,8 +261,8 @@ def donate(request, donation_pk, user_pk):
 
 def payment_status(request , order_id):
 
-    api_key = 'TEST1019726310159d84051d9684409136279101'
-    api_secret = 'cfsk_ma_test_9f7806b183df0cbedf76e4a00a8bfbff_ff123b76'
+    api_key = 'xxx'
+    api_secret = 'xxx'
     auth_string = f"{api_key}:{api_secret}"
     b64_auth_string = base64.b64encode(auth_string.encode()).decode()
 
